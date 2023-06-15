@@ -1,0 +1,105 @@
+** react-router-DOM(중요!! 대체제가 없음)
+
+    router(경로) => 네트워크 데이터 전송하는 경로 = 소포
+    react에서 dom을 전달하기 위해 사용하는 경로
+    경로 설정에 관한 라이브러리
+
+    ex) url이 변함에 따라 다른 DOM을 index.html에 전달하는 역할
+
+    https://reactrouter.com/en/main
+
+    npm i react-router-dom 
+    npm i react-router-dom@6.6.2
+
+
+styled-Component === emotion(css-in-js)
+
+    js안에 css문법을 작성
+    npm i styled-components
+
+fontawesome
+
+    icon 관련된 라이브러리
+    @fortawesome/free-solid-svg-icons
+    @fortawesome/react-fontawesome
+
+styled-reset
+
+    styled-components reset-css
+    npm i styled-reset
+
+-------------------------------------------------------------
+
+리엑트의 폴더 설계
+    정답은 없음 
+    프로젝트 규모와 환경에 따라 유지보수 용이하게 짜야함
+
+    1.presentation - container
+
+    container에서 비지니스 로직을 통한 데이터를 처리하고
+    presentation에서 처리된 데이터를 출력하여 사용자에게 보여주는 형태
+
+    react는 비지니스로직과 view가 합쳐져있는 형태
+    유지보수 용이하지 않다
+    그래서 비지니스로직과 UI를 분리하기 위해 나온 컴포넌트 패턴이다.
+
+    그러나 이를 개발한 개발자도 2019년을 기준으로 해당 패턴은 더이상 사용하지 말라고함
+
+    react의 hook함수의 탄생 -> 컴포넌트패턴으로 UI와 비지니스로직을 분리하지 않아도 
+    충분히 똑같은 일을 할 수 있기 때문
+
+    2. custom hook
+
+    container가 하는 역할을 hook함수를 custom한 hook함수의 로직으로 관리하고
+    UI 재사용 및 로직 또한 재사용 가능하도록 한 패턴
+
+    components(모든 컴포넌트에서 공용으로 사용해야하는 컴포넌트)
+        -Button.js
+        -Image.js
+        -Select.js
+        -Video.js
+
+    utils(유틸 함수들 모아두는 곳)
+        -arrayhelper.js
+        -parsehelper.js
+    consts(상수 모아두는 곳)
+        -key.js
+    styles(전역 스타일링)
+        -theme.js
+        -media.js
+        -animation.js
+        -globalStyle.js
+    pages(모든 컴포넌트들이 합쳐져서 페이지를 이루는 곳)
+        -home
+            -home.js
+            -component.js
+        -my-page.js
+        -product-list.js
+    routes
+        -private-route.js
+        -public-route.js
+        -route.js
+    hooks(재사용이 가능한 훅함수)
+        useInput.js
+        ...
+    ...etc
+    app.js
+
+    3. atomic
+        atom(원자)
+            -Button.js
+            -Input.js
+        molecules(분자)
+            -Searchbar.js
+        organisms(유기체)
+            -Menu.js
+        templates(템플릿)
+            -Header.js
+        pages(페이지)
+            -home.js
+                atoms
+                molecules
+                organisms
+                templates
+                pages
+                home.js
