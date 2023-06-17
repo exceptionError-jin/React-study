@@ -4,6 +4,7 @@ import SignUpForm from './components/SignUp';
 import { flexCenter } from '../../styles/common';
 import { PALETTE } from '../../styles/theme';
 
+
 const MainPage = () => {
 
     let isFormLogin = true;
@@ -31,6 +32,7 @@ const MainPage = () => {
                 {isFormLogin ? <SignInForm/> : <SignUpForm/>}
                 
         </S.Container>
+        
     )
 }
 
