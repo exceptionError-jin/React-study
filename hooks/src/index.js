@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  //StrictMode는 엄격하게 에러를 검사해주는 역할
+  //끄면 안됨
   <React.StrictMode>
     <App />
   </React.StrictMode>

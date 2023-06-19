@@ -15,6 +15,7 @@ function UseRef() {
         count.current += 1;
     }
 
+    //강제로 리랜더링 시키기 위해 만듦
     const onForceReRender = () => {
         //true, false반복
         setForceReRender((prev) => !prev);
@@ -24,6 +25,8 @@ function UseRef() {
 
     return (
         <div>
+            {/* forceReRender가 true일 때만 show를 보여줌 */}
+            {forceReRender && <div>show</div>}
             <div ref={htmlRef}>colors</div>
             <button onClick={onChangeUseRef}>카운트 추가</button>
             <button onClick={onForceReRender}>리랜더링</button>
