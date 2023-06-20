@@ -1,12 +1,11 @@
 import { keyframes } from "styled-components";
 
-
 export const fadeIn = keyframes`
-    from{
+    from {
         opacity: 0;
     }
-    to{
-        opacity: 1; 
-        transform: translateX(-30px);
+    to {
+        opacity: 1;
+        transform: translate(-30px);
     }
 `

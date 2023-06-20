@@ -1,25 +1,26 @@
-import {createBrowserRouter} from 'react-router-dom'
-import MainPage from '../pages/main';
-import TodoPage from '../pages/todo';
-import Layout from '../components/Layout';
+import { createBrowserRouter } from 'react-router-dom'
+import MainPage from '../pages/main'
+import TodoPage from '../pages/todo'
+import Layout from '../components/Layout'
 
+//export
 const router = createBrowserRouter([
-
     {
         path: '/',
         element: <Layout/>,
-        children: [
+        children:[
             {
-                path: '',
-                element: <MainPage/>
+                path: '/',
+                element:<MainPage/>
             },
             {
-                path: 'todo/:todoId',
-                element: <TodoPage/>
-            }
+                path: '/todo/:todoId',
+                element:<TodoPage/>
+            }  
         ]
     }
+    
+])
 
-]);
-
-export default router;//기본값으로 router를 export하겠다.
+//기본값
+export default router

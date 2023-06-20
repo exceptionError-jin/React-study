@@ -2,22 +2,17 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 const GlobalStyles = createGlobalStyle`
-    ${reset}
-    * {
+    *{
         box-sizing: border-box;
     }
-
-    body {
+    body{
         background-color: #e7e7e7;
     }
-
-    button {
+    button{
         border: none;
     }
-
-    ul > li {
+    ul > li{
         list-style: none;
     }
 `;
-
 export default GlobalStyles;
