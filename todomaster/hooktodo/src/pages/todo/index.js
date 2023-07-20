@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {useParams} from "react-router-dom";
 import BasicButton from "../../components/Button/Button";
 import styled from "styled-components";
@@ -6,48 +6,75 @@ import { flexAlignCenter, flexCenter } from "../../styles/common";
 import TodoAddModal from "./components/Modal/add-modal";
 import TodoList from "./components/List/todo-list";
 import { ToastContainer, toast } from 'react-toastify';
-
 import 'react-toastify/dist/ReactToastify.css';
 const TodoPage = () =>{
     const params = useParams();
+    console.log(params);
+    
+    const [isAddTodoModal, setIsAddTodoModal] = useState(false); 
+      
+    const [todoList, setTodoList] = useState([
+        {
+            id: 1,
+            title: "example1",
+            content: "content1",
+            state: false,                                                                                                     
+        },
+    ]);
 
-    const toastOption = {
-        autoClose : 1000,
-        theme : 'colored'
-    };
-
-    const addTodo = () =>{
-    return new Promise ((resolve) =>setTimeout(resolve, 1000))
+    const addTodo = (title, content) =>{
+        return new Promise ((resolve) =>setTimeout(() => {
+            const newTodo = {
+                id: Math.floor(Math.random() * 100000),
+                state: false,
+                title,
+                content,
+            }
+            resolve(newTodo)
+        }, 2000)).then((res)=> {
+            console.log(res);
+            setTodoList([res, ...todoList]);
+            setIsAddTodoModal(false);
+        })
     };
 
     const showTodoToastMessage = (e) => {
         e.preventDefault();
-            toast.promise(addTodo, {
-            pending: 'TODO LOADING',
-            success: "TODO SUCEESS",
-            error: "TODO ERROR"
-            })
+        const title = e.target.title.value;
+        const content = e.target.content.value;
+
+        toast.promise(addTodo(title, content), {
+        pending: 'TODO LOADING',
+        success: "TODO SUCEESS",
+        error: "TODO ERROR"
+        })
      };
-//     const resolveAfter3Sec = new Promise(resolve => setTimeout(resolve, 3000));
-// toast.promise(
-//     resolveAfter3Sec,
-//     {
-//       pending: 'Promise is pending',
-//       success: 'Promise resolved 👌',
-//       error: 'Promise rejected 🤯'
-//     }
-// )
+
+     const toastOption = {
+        autoClose : 2000,
+        theme : 'colored'
+    };
+
+    const handleOpenTodoModal = () => {
+        setIsAddTodoModal(true);
+    }
+
+    const handleCloseTodoModal = () => {
+        setIsAddTodoModal(false);
+    }
+
     return (
     <>
-        <TodoAddModal onAddToDo={showTodoToastMessage}/>
+        {isAddTodoModal && <TodoAddModal onAddToDo={showTodoToastMessage} onClose={handleCloseTodoModal}/>}
         <S.Wrapper>
             <S.Container>
                 <S.Title>List</S.Title>
                 <S.Content>  
-                    <TodoList/>
+                    <TodoList todoList={todoList}/>
                 </S.Content>
                 <S.ButtonBox>
-                    <BasicButton variant = {"primary"} size={"full"}>
+                    <BasicButton variant = {"primary"} size={"full"}
+                    onClick={handleOpenTodoModal}>
                         추가
                     </BasicButton>
                 </S.ButtonBox>

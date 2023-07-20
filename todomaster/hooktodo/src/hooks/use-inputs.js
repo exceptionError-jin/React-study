@@ -12,6 +12,7 @@ const useInputs = (initialValue) => {
     const onChange = (event) => {
         // event 객체에서 name과 value를 추출하여
         // 이전 values 상태를 복사하고 변경된 값을 업데이트함
+        console.log(event.target.name);
         setValues((prev) => ({
             ...prev,
             [event.target.name]: event.target.value,

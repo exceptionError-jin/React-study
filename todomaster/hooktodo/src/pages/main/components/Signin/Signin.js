@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import BasicButton from '../../../../components/Button/Button'
 import * as S from '../../style'
-import useInput from '../../../../hooks/use-input';
 
 const SignInForm = ()=>{
 
@@ -9,10 +8,20 @@ const SignInForm = ()=>{
     // const [email, onChangeEmail] = useInput();
     // const [password, onChangePassword] = useInput();
 
+    const navigation = useNavigate();
+
     const onPressSignIn = (e) => {
         e.preventDefault();
 
         console.log(e.target.email.value, e.target.password.value);
+
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+
+        if(email === "test" && password === "test"){
+            return navigation('/todo/1');
+        }
+        return alert("아이디와 비밀번호를 확인해주세요.");
     };
 
     return (
